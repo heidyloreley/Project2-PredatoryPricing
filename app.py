@@ -11,7 +11,7 @@ from flask import Flask, jsonify, render_template
 
 engine = create_engine("sqlite:///amazon_db.db")
 Base = automap_base()
-Base.prepare(engine, reflect=True)
+Base.prepare(engine, reflect=True)   
 
 # Identify tables names
 print(Base.classes.keys()) 
