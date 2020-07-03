@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<HTML lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sellers Analysis</title>
+    <link rel="stylesheet" href="static/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/styles/stylesellers.css">
+    <script src="static/js/d3.v5.min.js"></script>
+    <script src="static/js/d3-simple-slider.min.js"></script>
+    <script src='static/js/plotly-latest.min.js'></script>
+    <script src="static/js/jquery.min.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+
+<body class="bodyDiv">
+
+    <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a href="https://github.com/greciavm/project2" target="_blank">Predatory Pricing at Amazon | </a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="seller.html">Sellers Analysis</a></li>
+                    <li><a href="price.html">Max. Price per Seller</a></li>
+                    <li><a href="team.html">The Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home">
+    </section>
+    </br>
+    </br>
+    <h2 class="myH2">Sellers Analysis</h2>
+    </br>
+    </br>
+    <div class='bodyDiv mx-4' style="container-fluid">
+        <div class="row mt-4 mb-4">
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-12">
+                        </br>
+                        <div class="card bg-dark float-right" style="width: 30rem">
+                            <div class="card-body">
+                                <div id="well"><span class="well" style="width: 30rem"></span>
+                                    <h5>Filter by Seller's Name:</h5>
+                                    <select id="selDataset" onchange="optionChanged(this.value)"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card float-right" id="product-image" style="width: 300px">
+                        </div>
+                        <div class="card float-right" style="width: 300px">
+                            <div class="card-body">
+                                <p class="card-text" id=product-description></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="scatter"></div>
+                </div>
+                <div class="col-6">
+                    <br>
+                    <br>
+                    <br>
+                    <h4 class="text-dark text-left">Click on a product in the table below to view their description and image.</h4>
+                
+                    <div id="table-area" class="">
+                        <table id="suppliers-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="table-head">Seller Name</th>
+                                    <th class="table-head">Brand Name</th>
+                                    <th class="table-head">ASIN</th>
+                                    <th class="table-head">Product Name</th>
+                                    <th class="table-head">Price (in rupees)</th>
+                                    <th class="table-head">Number of Reviews</th>
+                                    <th class="table-head">Discount %</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </br>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="mx-5" id='plotsDiv' alt="Max-width 100%">
+
+        <div class="col-12 mx-5" style="Max-width: 100%">
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="static/js/seller.js"></script>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+
+
+    <!-- ICON NEEDS FONT AWESOME FOR CHEVRON UP ICON -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <style>
+        #return-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.7);
+            width: 50px;
+            height: 50px;
+            display: block;
+            text-decoration: none;
+            -webkit-border-radius: 35px;
+            -moz-border-radius: 35px;
+            border-radius: 35px;
+            display: none;
+            -webkit-transition: all 0.3s linear;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        #return-to-top i {
+            color: #fff;
+            margin: 0;
+            position: relative;
+            left: 16px;
+            top: 13px;
+            font-size: 19px;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        #return-to-top:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        #return-to-top:hover i {
+            color: #fff;
+            top: 5px;
+        }
+
+        /* Extra Things */
+        body {
+            background: #eee;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h3 {
+            font-size: 30px;
+            font-weight: 400;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h5 {
+            color: white;
+        }
+    </style>
+    <script>
+        // ===== Scroll to Top ==== 
+        $(window).scroll(function () {
+            if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                $('#return-to-top').fadeIn(200);    // Fade in the arrow
+            } else {
+                $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+            }
+        });
+        $('#return-to-top').click(function () {      // When arrow is clicked
+            $('body,html').animate({
+                scrollTop: 0                       // Scroll to top of body
+            }, 500);
+        });
+    </script>
+    <!-- Footer -->
+    <footer class="page-footer">
+
+        <!-- Footer Text -->
+        <div class="container-fluid text-center">
+            <div class="row justify-content-center" style="text-align:left">
+                <div class="col-xl-4 col-md-6">
+                    <h2 class="myHFoot">Site Map</h2>
+                    <a class="myPFoot" href="index.html">Home</a></li></br>
+                    <a class="myPFoot" href="seller.html">Sellers Analysis</a></li></br>
+                    <a class="myPFoot" href="price.html">Maximum Price per Seller</a></li></br>
+                    <a class="myPFoot" href="team.html">The Team</a></li></br>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <h2 class="myHFoot">Developers</h2>
+                    <a class="myPFoot" href="https://www.linkedin.com/in/greciavillarreal" target="blank">Grecia
+                        Villareal</a></li></br>
+                    <a class="myPFoot" href="https://www.linkedin.com/in/heidyloreley/" target="blank">Heidy Guzmán</a>
+                    </li></br>
+                    <a class="myPFoot"
+                        href="https://www.linkedin.com/in/ra%C3%BAl-sergio-far%C3%ADas-p%C3%A9rez-7a0927193/"
+                        translate="blank">Raúl Farías</a></li></br>
+                    <a class="myPFoot" href="https://www.linkedin.com/in/andr%C3%A9s-guti%C3%A9rrez-estrada-994b8aa7/"
+                        target="blank">Andrés Gutiérrez</a></li></br>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <h2 class="myHFoot">Data Sources</h2>
+                    <a class="myPFoot" href="https://data.world/data-hut/predatory-pricing-data-from-amazon"
+                        target="blank">Data.World</a></li>
+                    </br>
+                    <a class="myPFoot" href="https://www.amazon.com/" target="blank">Amazon</a></li></br>
+                </div>
+            </div>
+
+        </div>
+        <!-- Grid row -->
+        <!-- Footer Text -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            &copy;
+            <script type="text/javascript">
+                var today = new Date()
+                var year = today.getFullYear()
+                document.write(year)
+            </script>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+    <!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+</body>
+
+</HTML>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Suppliers Analysis</title>
+  <h1>Maximun price by seller</h1>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+
+      </div>
+
+  
+      <canvas id="myChart"></canvas>
+    
+    </div>
+    <!-- <footer class="footer">
+      <span class="bottom">UFO Sightings</span>
+    </footer> -->
+  </div>
+```
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="../static/js/sellers.js"></script>
+  <script src="../amazon.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script>
+var url = "http://127.0.0.1:5000/api/project2/products";
+var ctx = document.getElementById('myChart').getContext('2d');
+function displayScatter() {
+    d3.json(url).then((dataInfo) => {
+
+        // Information of all prices
+        var Price = dataInfo.map(x => x.sale_price);
+        var MaxPrice = dataInfo.map(x => x.mrp);
+        var Seller = dataInfo.map(x => x.seller_name);
+        console.log(dataInfo);
+
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: Seller,
+                datasets: [{
+                    label: 'Max price: ',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: MaxPrice,
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+    }
+});
+
+        });
+    }
+displayScatter();
+  </script>
+  
+</body> 
+
+</html>
