@@ -33,7 +33,7 @@ app = Flask(__name__)
 #Home Page of our WebPage
 @app.route("/")
 def home():
-    return render_template("indexsellers.html")
+    return render_template("index.html")
 
 #Page of our api links
 @app.route("/api/project2")
